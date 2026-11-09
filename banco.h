@@ -29,7 +29,7 @@ class Banco {
     double rendimientoTrimestral(double capital);
     double rendimientoMensual(double capital);
 
-
+ /// double trabaja con decimales
 };
 
 #endif // BANCO_H_INCLUDED
