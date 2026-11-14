@@ -26,6 +26,7 @@ int main()
         cout << "3 - RENDIMIENTO MENSUAL" << endl;
         cout << "4 - CARGAR TASAS" << endl;
         cout << "5 - MOSTRAR PROMEDIOS" << endl;
+        cout << "6 - RECOMENDACION DE INVERSION" << endl;
         cout << "0 - Salir" << endl;
 
         cout << "\nOPCION: ";
@@ -146,6 +147,77 @@ int main()
             system ("cls");
             break;
 
+        case 6:
+
+    {
+        cout << "==============================================\n";
+        cout << "       RECOMENDACION DE INVERSION             \n";
+        cout << "==============================================\n\n";
+
+        Banco* bancos[3] = {&provincia, &nacion, &hipotecario};
+
+        string mejorBanco;
+        string mejorPeriodo;
+
+        double mayorRendimiento = 0;
+        double ganancia;
+        double resultado;
+
+        for(int i = 0; i < 3; i++)
+        {
+            // RENDIMIENTO ANUAL
+            resultado = bancos[i]->rendimientoAnual(capital);
+
+            if(resultado > mayorRendimiento)
+            {
+                mayorRendimiento = resultado;
+                mejorBanco = bancos[i]->getNombre();
+                mejorPeriodo = "Anual";
+            }
+
+            // RENDIMIENTO TRIMESTRAL
+            resultado = bancos[i]->rendimientoTrimestral(capital);
+
+            if(resultado > mayorRendimiento)
+            {
+                mayorRendimiento = resultado;
+                mejorBanco = bancos[i]->getNombre();
+                mejorPeriodo = "Trimestral";
+            }
+
+            // RENDIMIENTO MENSUAL
+            resultado = bancos[i]->rendimientoMensual(capital);
+
+            if(resultado > mayorRendimiento)
+            {
+                mayorRendimiento = resultado;
+                mejorBanco = bancos[i]->getNombre();
+                mejorPeriodo = "Mensual";
+            }
+        }
+
+        ganancia = mayorRendimiento - capital;
+
+        cout << "Capital inicial: $" << capital << endl;
+
+        cout << "\nLA MEJOR OPCION DE INVERSION ES:\n\n";
+
+        cout << "Banco recomendado: " << mejorBanco << endl;
+        cout << "Periodo recomendado: " << mejorPeriodo << endl;
+
+        cout << "\nGanancia obtenida: $" << ganancia << endl;
+
+        cout << "Capital final: $" << mayorRendimiento << endl;
+
+        cout << "\n==============================================\n";
+
+        system("pause");
+        system ("cls");
+
+    }
+    break;
+
+
         case 0:
 
             cout << "Saliendo..." << endl;
@@ -159,6 +231,6 @@ int main()
         }
 
     }while (opcion != 0);
-    
+
     return 0;
 }
